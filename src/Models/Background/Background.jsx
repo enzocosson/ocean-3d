@@ -30,8 +30,9 @@ export function Background() {
         color="#0c8cbf"
         position={[0, 20, 15]}
       />
+      <Spotlight color="#0c8cbf" position={[0, 25, 0]} />
 
-      <Environment preset="sunset" />
+      <Environment preset="city" background />
       <Sphere scale={[100, 100, 100]} rotation-y={Math.PI / 2}>
         <LayerMaterial
           color={"#ffffff"}

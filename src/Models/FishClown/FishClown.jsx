@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-// import { useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import "./FishClown.module.scss";
 
 export function FishClown(props) {
@@ -15,6 +15,20 @@ export function FishClown(props) {
     }
   }, [actions]);
 
+  const [speed, setSpeed] = useState(0);
+
+  useEffect(() => {
+    setSpeed(0.5 + Math.random());
+  }, []);
+
+  useFrame((state, delta) => {
+    group.current.position.y =
+      0 + 0.1 * Math.sin(state.clock.elapsedTime * 1 * speed);
+    group.current.rotation.y = Math.atan2(
+      group.current.position.x,
+      group.current.position.z
+    );
+  });
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">

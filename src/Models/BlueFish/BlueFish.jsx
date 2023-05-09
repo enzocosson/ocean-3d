@@ -1,14 +1,12 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-// import { useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import "./BlueFish.module.scss";
 
 export function GoldFish(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/models/BlueFishBand.glb");
 
-  const ref = useRef();
-  console.log(animations[0]);
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
     const animationAction = actions["Armature|Swim.001"];
@@ -16,6 +14,21 @@ export function GoldFish(props) {
       animationAction.play();
     }
   }, [actions]);
+
+  const [speed, setSpeed] = useState(0);
+
+  useEffect(() => {
+    setSpeed(0.5 + Math.random());
+  }, []);
+
+  useFrame((state, delta) => {
+    group.current.position.y =
+      0 + 0.1 * Math.sin(state.clock.elapsedTime * 2 * speed);
+    group.current.rotation.y = Math.atan2(
+      group.current.position.x,
+      group.current.position.z
+    );
+  });
 
   return (
     <group ref={group} {...props} dispose={null}>

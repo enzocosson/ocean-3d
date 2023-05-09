@@ -1,25 +1,5 @@
-@font-face {
-  font-family: "BasierCircle";
-  src: url("../public/font/BasierCircle-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "BasierCircle";
-  src: url("../public/font/BasierCircle-SemiBold.ttf") format("truetype");
-  font-weight: 500;
-}
 
-@font-face {
-  font-family: "BasierCircle";
-  src: url("../public/font/BasierCircle-Bold.ttf") format("truetype");
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "BasierCircle";
-  src: url("../public/font/BasierCircle-Medium.ttf") format("truetype");
-  font-weight: 600;
-}
-
+@import url(https://fonts.googleapis.com/css?family=League+Gothic:regular);
 :root {
   --primary-color: #6dcdda;
   --white: #f3f3f3;
@@ -29,7 +9,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "BasierCircle", sans-serif;
+  font-family: "League Gothic", sans-serif;
 }
 body {
   position: relative;
