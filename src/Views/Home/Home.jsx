@@ -26,6 +26,7 @@ function Home() {
     
       <section className={styles.couverture}>
         <h1 className={styles.title}>OCEAN</h1>
+        <h2 className={styles.small}>Explorez le monde sous-marin en 3D</h2>
       </section>
 
       <section className={styles.whale}>
