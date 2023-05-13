@@ -1,6 +1,6 @@
 import React from "react";
 // import Header from "../Header/Header";
-// import Footer from "../Footer/Footer";
+import Footer from "../Footer/Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "../../Views/Home/Home";
 import Content from "../../Views/Content/Content";
@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 }

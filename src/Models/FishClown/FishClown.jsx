@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import React, { useRef, useEffect, useLayoutEffect } from "react";
+import { useGLTF, useAnimations, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import gsap from "gsap";
 import "./FishClown.module.scss";
 
 export function FishClown(props) {
@@ -15,20 +16,49 @@ export function FishClown(props) {
     }
   }, [actions]);
 
-  const [speed, setSpeed] = useState(0);
+  const scroll = useScroll();
+  const tl = useRef();
 
-  useEffect(() => {
-    setSpeed(0.5 + Math.random());
+
+
+
+
+ 
+
+  useFrame(() => {
+    if (scroll && scroll.offset)
+      tl.current.seek(scroll.offset * tl.current.duration());
+  });
+
+  useLayoutEffect(() => {
+    tl.current = gsap.timeline({ paused: true, duration: 1 });
+    // Card movement and rotation
+    tl.current.to(group.current.position, {
+      duration: 0.5,
+      x: 3,
+      y: 0,
+      z: 10,
+      ease : "power3.out"
+    }, 0.4);
+   
+
+
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const progress = scrollTop / (documentHeight - windowHeight);
+      tl.current.seek(progress * tl.current.duration());
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  useFrame((state, delta) => {
-    group.current.position.y =
-      0 + 0.1 * Math.sin(state.clock.elapsedTime * 1 * speed);
-    group.current.rotation.y = Math.atan2(
-      group.current.position.x,
-      group.current.position.z
-    );
-  });
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">

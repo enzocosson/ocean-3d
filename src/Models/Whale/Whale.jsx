@@ -30,17 +30,38 @@ export function Whale(props) {
   });
 
   useLayoutEffect(() => {
-    tl.current = gsap.timeline({ paused: true });
-    // Card movement and rotation
+    tl.current = gsap.timeline({ paused: true, duration: 2 });
+
     tl.current.to(ref.current.position, {
-      duration: 0.5,
-      x: 0,
-      y: 35,
-      z: 70,
-      onUpdate: () => {
-        ref.current.rotation.y += 0.05;
-      },
-    });
+      duration: 0.6,
+      // z: 100,
+      y: 10,
+      z: 50,
+      ease: "power3.inOut",
+    },
+    0);
+    tl.current.to(ref.current.position, {
+      duration: 1,
+      // z: 100,
+      y: 10,
+      z: -50,
+      ease: "power3.inOut",
+    },
+    1);
+
+
+    tl.current.to(ref.current.rotation, {
+      duration: 1,
+      x: -3,
+      ease: "power3.inOut",
+    },  
+    0);
+    tl.current.to(ref.current.rotation, {
+      duration: 1,
+      x: -3,
+      ease: "power3.inOut",
+    },  
+    1);
 
     const handleScroll = () => {
       const scrollTop =

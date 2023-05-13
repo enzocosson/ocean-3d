@@ -16,10 +16,10 @@ export function Experience(props) {
         <OrbitControls enableZoom={false} />
         <color attach="background" args={["#89c2d9"]} />
         <Background />
-        <FishClown position={[0, 0, 0]} rotation={[0, 0, 0]} scale={0.05} />
-        <BlueFish position={[0, 0, 0]} rotation={[0, 0, 0]} scale={0.05} />
-        <Shark position={[0, -5, 0]} rotation={[0, 0, 0]} scale={0.4} />
-        <Whale position={[0, -50, -100]} rotation={[0, 0, 0]} scale={1.5} />
+        <FishClown position={[0, 0, -200]} rotation={[0, 0, 0]} scale={0.05} />
+        <BlueFish position={[0, 0, -200]} rotation={[0, 0, 0]} scale={0.05} />
+        <Shark position={[0, -5, -200]} rotation={[0, 0, 0]} scale={0.4} />
+        <Whale position={[0, 50, 0]} rotation={[1.57, 0, 0]} scale={1.5} />
       </Suspense>
     </>
   );

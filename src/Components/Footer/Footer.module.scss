@@ -1,8 +1,7 @@
 footer {
   width: 100%;
-  background-color: var(--black);
+  background-color: rgb(12, 34, 64);
   color: var(--white);
-  padding: 2rem;
 
   display: flex;
   justify-content: center;
@@ -10,83 +9,19 @@ footer {
 
   .container__footer {
     width: 1200px;
-    height: 300px;
+    height: 100px;
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 
     h5 {
-      font-size: 3rem;
+      font-size: 2rem;
       font-weight: bold;
-      margin-bottom: 2rem;
     }
 
-    .link {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-
-      .contact {
-        row-gap: 0.5rem;
-        h6 {
-          font-size: 2rem;
-          font-weight: bold;
-          margin-bottom: 1rem;
-        }
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-
-        p {
-          color: var(--white);
-          font-size: 1rem;
-        }
-      }
-      .legal {
-        row-gap: 0.5rem;
-        h6 {
-          font-size: 2rem;
-          font-weight: bold;
-          margin-bottom: 1rem;
-        }
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-
-        p {
-          color: var(--white);
-          font-size: 1rem;
-        }
-      }
-      .social {
-        row-gap: 0.5rem;
-        h6 {
-          font-size: 2rem;
-          font-weight: bold;
-          margin-bottom: 1rem;
-        }
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-
-        p {
-          color: var(--white);
-          font-size: 1rem;
-        }
-      }
-
-      .back__card {
-        width: 250px;
-      }
+    p {
+      letter-spacing: 0.05rem;
     }
   }
 }

@@ -1,13 +1,16 @@
 import React, { useRef, useEffect, useLayoutEffect } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
-// import gsap from "gsap";
-// import { useFrame } from "@react-three/fiber";
+import { useGLTF, useAnimations, useScroll } from "@react-three/drei";
+import gsap from "gsap";
+import { useFrame } from "@react-three/fiber";
 import "./Shark.module.scss";
 
 export function Shark(props) {
   const { nodes, materials, animations } = useGLTF("/models/Shark.glb");
 
+
+  const scroll = useScroll();
   const ref = useRef();
+  const tl = useRef();
 
   const { actions } = useAnimations(animations, ref);
 
@@ -18,51 +21,37 @@ export function Shark(props) {
     }
   }, [actions]);
 
-  // const tl = useRef();
+  useFrame(() => {
+    if (scroll && scroll.offset)
+      tl.current.seek(scroll.offset * tl.current.duration());
+  });
 
-  // useLayoutEffect(() => {
-  //   tl.current = gsap.timeline({ paused: true });
-  //   // Card movement and rotation
-  //   tl.current.to(ref.current.position, {
-  //     duration: 0.5,
-  //     x: 13,
-  //     y: 0,
-  //     z: 7,
-  //     onUpdate: () => {
-  //       ref.current.rotation.y += 0.05;
-  //     },
-  //   });
+  useLayoutEffect(() => {
+    tl.current = gsap.timeline({ paused: true, duration: 1 });
+    // Card movement and rotation
+    tl.current.to(ref.current.position, {
+      duration: 1,
+      x: 3,
+      y: 0,
+      z: 80,
+    }, 0);
+   
 
-  //   // Card rotation --------------------------------
-  //   tl.current.to(
-  //     ref.current.rotation,
-  //     {
-  //       duration: 0.5,
-  //       x: -1.57,
-  //       y: 4.71,
-  //       z: 0,
 
-  //       onUpdate: () => {
-  //         ref.current.rotation.y -= 0.05;
-  //       },
-  //     },
-  //     0
-  //   );
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const progress = scrollTop / (documentHeight - windowHeight);
+      tl.current.seek(progress * tl.current.duration());
+    };
 
-  //   const handleScroll = () => {
-  //     const scrollTop =
-  //       window.pageYOffset || document.documentElement.scrollTop;
-  //     const windowHeight = window.innerHeight;
-  //     const documentHeight = document.documentElement.scrollHeight;
-  //     const progress = scrollTop / (documentHeight - windowHeight);
-  //     tl.current.seek(progress * tl.current.duration());
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <group ref={ref} {...props} dispose={null}>
